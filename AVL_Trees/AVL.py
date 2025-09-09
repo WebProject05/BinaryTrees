@@ -141,5 +141,6 @@ newAVL = insertNode(newAVL, 4)
 newAVL = insertNode(newAVL, 40)
 newAVL = insertNode(newAVL, 30)
 
+# This is Level Order Traversal for the AVL trees
 print("Level Order Traversal of AVL Tree: ")
 levelOrderTraversal(newAVL)
