@@ -162,12 +162,26 @@ def deleteNode(rootNode, value):
     rootNode.data = temp.data
     rootNode.rightChild = deleteNode(rootNode.rightChild, temp.data)
 
+  balance = getBalanced(rootNode)
+  if balance > 1 and getBalanced(rootNode.leftChild) >= 0:
+    return rightRotate(rootNode)
+  if balance < -1 and getBalanced(rootNode.rightChild) <= 0:
+    return leftRotate(rootNode)
+  if balance > 1 and getBalanced(rootNode.leftChild) <= 0:
+    rootNode.leftChild = leftRotate(rootNode.leftChild)
+    return rightRotate(rootNode)
+  if balance < -1 and getBalanced(rootNode.rightChild) > 0:
+    rootNode.rightChild = rightRotate(rootNode.rightChild)
+    return leftRotate(rootNode)
+  
+  return rootNode
 newAVL = AVLNode(10)
 newAVL = insertNode(newAVL, 3)
 newAVL = insertNode(newAVL, 9)
 newAVL = insertNode(newAVL, 4)
 newAVL = insertNode(newAVL, 40)
 newAVL = insertNode(newAVL, 30)
+newAVL = deleteNode(newAVL, 9)
 
 # This is Level Order Traversal for the AVL trees
 print("Level Order Traversal of AVL Tree: ")
