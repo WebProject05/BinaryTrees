@@ -175,6 +175,19 @@ def deleteNode(rootNode, value):
     return leftRotate(rootNode)
   
   return rootNode
+
+
+
+
+def deleteAVL(rootNode):
+  rootNode = None
+  rootNode.leftChild = None
+  rootNode.rightChild = None
+  rootNode.height = 0
+
+  return "AVL Tree has been deleted"
+
+
 newAVL = AVLNode(10)
 newAVL = insertNode(newAVL, 3)
 newAVL = insertNode(newAVL, 9)
