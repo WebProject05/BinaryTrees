@@ -134,6 +134,34 @@ def insertNode(rootNode, nodeValue):
   return rootNode
 
 
+def getMinValue(rootNode):
+  if rootNode is None or rootNode.leftChild is None:
+    return rootNode
+  
+  return getMinValue(rootNode.leftChild)
+
+
+def deleteNode(rootNode, value):
+  if not rootNode:
+    return rootNode
+  elif value < rootNode.data:
+    rootNode.lefChild = deleteNode(rootNode.leftChild, value)
+  elif value > rootNode.data:
+    rootNode.rightChild = deleteNode(rootNode.rightChild, value)
+  else:
+    if rootNode.leftChild is None:
+      temp = rootNode.rightChild
+      rootNode = None
+      return temp
+    elif rootNode.rightChild is None:
+      temp = rootNode.leftChild
+      rootNode = None
+      return temp
+    
+    temp = getMinValue(rootNode.rightChild)
+    rootNode.data = temp.data
+    rootNode.rightChild = deleteNode(rootNode.rightChild, temp.data)
+
 newAVL = AVLNode(10)
 newAVL = insertNode(newAVL, 3)
 newAVL = insertNode(newAVL, 9)
