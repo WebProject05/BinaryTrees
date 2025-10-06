@@ -121,6 +121,9 @@ def extractNode(rootNode, heapType):
     return extractedNode
 
 
+def deleteTree(rootNode):
+    rootNode.customList = None
+    
 # newBinaryHeap = Heap(5)
 
 # newBinaryHeap.customList[1] = 10
