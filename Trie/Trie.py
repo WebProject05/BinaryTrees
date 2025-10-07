@@ -36,6 +36,43 @@ class Trie:
     else:
       return False
 
+def deleteString(root, word, index):
+    ch = word[index]
+    currentNode = root.children.get(ch)
+    canThisNodeBeDeleted = False
+
+    # Case 1: Word doesn't exist
+    if currentNode is None:
+        return False
+
+    # Case 2: Still traversing through nodes
+    if len(currentNode.children) > 1:
+        deleteString(currentNode, word, index + 1)
+        return False
+
+    # Case 3: Reached last character of the word
+    if index == len(word) - 1:
+        # Word not found as valid string
+        if currentNode.endOfString == False:
+            return False
+        # Unmark endOfString
+        currentNode.endOfString = False
+        # If no children, we can delete this node
+        if len(currentNode.children) == 0:
+            root.children.pop(ch)
+            return True
+        else:
+            return False
+
+    # Case 4: Recursive call for next character
+    canThisNodeBeDeleted = deleteString(currentNode, word, index + 1)
+
+    # Delete child node reference if it can be deleted
+    if canThisNodeBeDeleted:
+        root.children.pop(ch)
+        # Check if current node is deletable now
+        return not root.endOfString and len(root.children) == 0
+    return False
 
 
 newTrie = Trie()  #Initialiaztion of the trie class
