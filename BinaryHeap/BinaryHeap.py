@@ -55,6 +55,7 @@ def insertNode(rootNode, nodeValue, heapType):
     rootNode.heapSize = rootNode.heapSize + 1
     heapifyTreeInsert(rootNode, rootNode.heapSize, heapType)
 
+
 def heapifyTreeExtract(rootNode, index, heapType):
     leftIndex = index * 2
     rightIndex = index * 2 + 1
