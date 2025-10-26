@@ -1,3 +1,5 @@
+from collections import deque
+
 class Graphs:
   def __init__(self, graphDict = None):
     if graphDict is None:
@@ -49,6 +51,21 @@ class Graphs:
       del self.graphDict[vertex]
       return True
     return False
+  
+
+  def BFS(self, vertex):      #Time complexity: O(V + E)   v -> number of vertex, e -> number of edges
+    visited = set()           
+    visited.add(vertex)       #Space complexity: O(V)
+    queue = deque([vertex])
+    while queue:
+      current_vertex = queue.popleft()
+      print(current_vertex)
+      for adjacent_vertex in self.graphDict[current_vertex]:
+        if adjacent_vertex not in visited:
+          visited.add(adjacent_vertex)
+          queue.append(adjacent_vertex)
+          
+
 
 
 
@@ -67,9 +84,15 @@ graph = Graphs(customGraph)
 graph.addVertex("a")
 graph.addVertex("b")
 graph.addVertex("c")
+graph.addVertex("d")
+graph.addVertex("e")
 graph.addEdge("a", "b")
 graph.addEdge("a", "c")
-graph.removeEdge("a", "c")
-graph.removeVertex("c")
+graph.addEdge("b", "e")
+graph.addEdge("c", "d")
+graph.addEdge("d", "e")
 
-graph.printGraph()
+
+# graph.printGraph()
+print("Breadth for search: ")
+graph.BFS("a")
