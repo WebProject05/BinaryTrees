@@ -64,7 +64,20 @@ class Graphs:
         if adjacent_vertex not in visited:
           visited.add(adjacent_vertex)
           queue.append(adjacent_vertex)
-          
+
+
+  def DFS(self, vertex):
+    visited = set()
+    stack = [vertex]
+    while stack:
+      current_vertex = stack.pop()
+      if current_vertex not in visited:
+        print(current_vertex)
+        visited.add(current_vertex)
+      for adjacent_vertex in self.graphDict[current_vertex]:
+        if adjacent_vertex not in visited:
+          stack.append(adjacent_vertex)
+            
 
 
 
@@ -96,3 +109,6 @@ graph.addEdge("d", "e")
 # graph.printGraph()
 print("Breadth for search: ")
 graph.BFS("a")
+
+print("Depth for search:")
+graph.DFS("a")
